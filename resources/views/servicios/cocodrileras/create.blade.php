@@ -1,194 +1,267 @@
-@extends('layouts.master')
+@extends('layouts.appOFF')
 
-@section('css')
-<!-- CSS SITE -->
-<link href="{{ asset('css/site.css') }}" rel="stylesheet">
+@section('localcss')
+<link href="{{ asset('css/jquery.dataTables.min.css') }}" rel="stylesheet">
+<style>
+    .progress-container {width: 100%;height: 8px;background: #ccc;}
+    .progress-bar {height: 8px;background: #4caf50;width: 0%;}
+    ul.breadcrumb {
+        padding: 10px 16px;
+        list-style: none;
+        background-color: #eee;
+    }
+    ul.breadcrumb li {
+        display: inline;
+        font-size: 18px;
+    }
+    ul.breadcrumb li+li:before {
+        padding: 8px;
+        color: black;
+        content: "/\00a0";
+    }
+    ul.breadcrumb li a {
+        color: #0275d8;
+        text-decoration: none;
+    }
+    ul.breadcrumb li a:hover {
+        color: #01447e;
+        text-decoration: underline;
+    }
+    input[type=text] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: 3px solid #ccc;
+        -webkit-transition: 0.5s;
+        transition: 0.5s;
+        outline: none;
+    }
 
-<!-- END CSS -->
+    input[type=text]:focus {
+        border: 3px solid orange ;
+    }
+    input[type=number]:focus {
+        border: 3px solid orange ;
+    }
+    textarea:focus {
+        border: 3px solid orange ;
+    }
+    select:focus {
+        border: 3px solid orange ;
+    }
+    #ueb_id:focus {
+        border: 3px solid orange ;
+    }
+    /**/
+    input[type=text], select, textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        resize: vertical;
+    }
+    label {
+        font-size: 18px;
+        padding: 12px 12px 12px 0;
+        display: inline-block;
+        color: black;
+    }
+    input[type=submit] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        float: right;
+    }
+    input[type=submit]:hover {
+        background-color:red;/* #01447e;*/
+    }
+    .col-15 {
+        float: left;
+        width: 15%;
+        margin-top: 6px;
+    }
+    .col-75 {
+        float: left;
+        width: 75%;
+        margin-top: 6px;
+    }
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+    .card1 {
+        display: flex;
+        flex-direction: column;
+        min-width: 100px;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        border: 1px solid rgba(0, 0, 0, 0.125);
+        border-radius: 0.25rem;
+    }
+    @media screen and (max-width: 600px) {
+        .col-25, .col-75, input[type=submit] {
+            width: 100%;
+            margin-top: 0;
+        }
+    }
+</style>
+@endsection
+
+@section('content-left')
+<div class="side" style="padding: 10px 10px;background-color: orange">
+    <ul class="breadcrumb">
+        <li><a href="home">Inicio</a></li>
+        <li><a href="cocodrileras">Cocodrileras</a></li>
+        <li><a href="cocodrileras/create">Nueva</a></li>
+    </ul>
+    <div class="column">
+        <div class="card1">
+            <p><i class="fa fa-user"></i>Notas</p>
+            <h3 id="explicacion"></h3>
+        </div>
+    </div>
+
+    <a href="/rcocodrileras" class="btn"><i class="fa fa-user"></i>
+        Volver a Reserva Cocodrileras
+    </a>
+    <a href="/mixtas" class="btn"> <i class="fa fa-user"></i>Volver a ReservaMixtas<i class="fa fa-cubes" aria-hidden="true"></i>
+    </a>
+
+
+
+
+
+</div>
 @endsection
 
 @section('content')
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper" style="background-color: #003300">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0 text-white">cocodrileras</h1>
-                    @if (session('status'))
-                    <div class="alert alert-success text-white alert-dismissible fade show" role="alert">
-                        <strong> {{ session('status') }} </strong>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
+<div class="main" style="padding: 10px 10px; background-color: #d4edda;">
+    <div class="container">
+
+
+        <form   method="post" action="{{url('/cocodrileras')}}" id="cocodrilera-form">
+            {{ csrf_field() }}   
+            <div class="form-group row">
+                <div class="col-15">
+                    <label for="name">Nombre</label>
+                </div>
+                <div class="col-75">
+                    <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required unique:cocodrileras maxlength="100" autofocus 
+                           onclick="document.getElementById('explicacion').innerHTML='Aqui se escribe el nombre de la Cocodrilera';">
+                    @if ($errors->has('name'))
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('name') }}</strong>
+                    </span>
                     @endif
-                </div><!-- /.col -->
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
-                        <li class="breadcrumb-item"><a href="/cocodrileras">cocodrileras</a></li>
-                        <li class="breadcrumb-item active text-white">Crear</li>
-                    </ol>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
-    <!-- Main content -->
-    <section class="content">
-        <div class="container-fluid">
-            <!-- Info boxes -->
+                </div>    
+            </div>    
 
-            <!-- /.row -->
+            <div class="form-group row">
+                <div class="col-15">    <label for="name">Capacidad</label></div>
+                <div class="col-75"> <input id="capacidad" type="number" class="form-control{{ $errors->has('capacidad') ? ' is-invalid' : '' }}" 
+                                            name="capacidad" value="{{ old('capacidad') }}" min="1" max="100" required autofocus step="1"
+                                            onclick="document.getElementById('explicacion').innerHTML='Aqui se escribe la Capacidad de la Cocodrilera';"
+                                            onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || event.charCode === 46)">
+                    @if ($errors->has('capacidad'))
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('capacidad') }}</strong>
+                    </span>
+                    @endif
+                </div>  
+            </div>  
 
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header border-transparent">
-                            <form   method="post" action="{{url('/cocodrileras')}}" id="cocodrilera-form">
-                                {{ csrf_field() }}       
-                                <div class="form-group row">
-                                    <label for="name">Nombre</label>
-                                    <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required unique:cocodrileras maxlength="100" autofocus>
-                                    @if ($errors->has('name'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>   
-                                <div class="form-group row">
-                                    <label for="name">capacidad</label>
-                                    <input id="capacidad" type="number" class="form-control{{ $errors->has('capacidad') ? ' is-invalid' : '' }}" 
-                                           name="capacidad" value="{{ old('capacidad') }}" min="1" max="100" required autofocus step="1"
-                                           onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || event.charCode === 46)">
-                                    @if ($errors->has('capacidad'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('capacidad') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>  
-                               
-                                <div class="form-group row">                                            
-                                    <label for="ueb_id">Ueb</label>
-                                    <a class="btn btn-success border-white btn-sm"
-                                       href="{{ URL::to('uebs/create') }}"><i class="fa fa-plus"></i>
-                                    </a>
-                                    <select id="ueb_id" class="form-control{{ $errors->has('ueb_id') ? ' is-invalid' : '' }}" name="ueb_id" value="{{ old('ueb_id') }}" required autofocus>
-                                        <option value="">Escoje...</option>
-                                        @foreach($uebs as $x => $ueb) 
+            <div class="form-group row">                                            
+                <div class="col-15">  <label for="ueb_id">Ueb</label></div>
+                <div class="col-75">  <a class="btn btn-success border-white btn-sm"
+                                         href="{{ URL::to('uebs/create') }}"><i class="fa fa-plus"></i>
+                    </a>
+                    <select id="ueb_id" class="form-control{{ $errors->has('ueb_id') ? ' is-invalid' : '' }}" name="ueb_id" value="{{ old('ueb_id') }}" required autofocus
+                            onclick="document.getElementById('explicacion').innerHTML='Aqui se selecciona la UEB de la Cocodrilera';">
+                        <option value="">Escoje...</option>
+                         @foreach($uebs as $x => $ueb) 
                                         <option value="{{$ueb->id}}">{{$ueb->name}}</option>
                                         @endforeach
-                                    </select>  
-                                    @if ($errors->has('ueb_id'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('ueb_id') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>                                
-                                <div class="form-group row">
-                                    <label for="activa"  >Activa</label>
-                                    <select id="activa"  class="form-control{{ $errors->has('activa') ? ' is-invalid' : '' }}" name="activa" value="{{ old('activa') }}" required autofocus>
-                                        <option value="">Escoje...</option>                                                   
-                                        <option value="1">Sí</option>
-                                        <option value="0">No</option>                                                    
-                                    </select>  
-                                    @if ($errors->has('activa'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('activa') }}</strong>
-                                    </span>
-                                    @endif
-                                </div> 
-                                <div class="form-group row">
-                                    <label for="observaciones"  >Observaciones</label>
-                                    <input id="observaciones" type="text" class="form-control{{ $errors->has('observaciones') ? ' is-invalid' : '' }}" name="observaciones" value="{{ old('observaciones') }}">
-                                    @if ($errors->has('observaciones'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('observaciones') }}</strong>
-                                    </span>
-                                    @endif
-                                </div> 
-                            </form>
-                            <a id="fb1" class="btn btn-outline-success" href="/home"
-                               onclick="event.preventDefault();
-                                       document.getElementById('cocodrilera-form').submit();
-                                       ">
-                                Crear un Nuevo Cocodrilera</a>
-                            <a href="/rcocodrileras" class="btn btn rounded border border-warning pull-right">
-                                <i class="fa fa-mouse-pointer"> Volver a Reserva Cocodrileras </i>
-                            </a>
-                            <a href="/mixtas" class="btn btn rounded border border-warning pull-right">
-                                <i class="fa fa-mouse-pointer"> Volver a ReservaMixtas </i><i class="fa fa-cubes" aria-hidden="true"></i>
-</a>
-                        </div><!--/. container-fluid -->
-                    </div><!--/. container-fluid -->
-                </div><!--/. container-fluid -->
-            </div><!--/. container-fluid -->
-        </div><!--/. container-fluid -->
-    </section>
-    <!-- /.content -->
+                    </select>  
+                    @if ($errors->has('ueb_id'))
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('ueb_id') }}</strong>
+                    </span>
+                    @endif
+                </div>    
+            </div>    
+
+            <div class="form-group row">
+                <div class="col-15"><label for="observaciones"  >Observaciones</label></div>
+                <div class="col-75"><input id="observaciones" type="text" class="form-control{{ $errors->has('observaciones') ? ' is-invalid' : '' }}" name="observaciones" value="{{ old('observaciones') }}"
+                                           onclick="document.getElementById('explicacion').innerHTML='Aqui se escribe la Observaciones';">
+                    @if ($errors->has('observaciones'))
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('observaciones') }}</strong>
+                    </span>
+                    @endif
+                </div>
+            </div>
+
+
+        </form>
+        <div class="col-15"></div><div class="col-75">
+            <a id="fb1" class="btn btn-outline-success" href="/home"
+               onclick="event.preventDefault();document.getElementById('cocodrilera-form').submit();
+               "><i class="fa fa-thumbs-up"></i>
+                Crear un Nuevo Cocodrilera</a>
+        </div>
+    </div>
 </div>
-<!-- /.content-wrapper -->
+
+
+
+
+
+
+
 @endsection
 
-@section('javascript')
-<!-- jQuery -->
-<script src="/dist/plugins/jquery/jquery.min.js"></script>
-<!--jQuery UI 1.11.4
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>--> 
-<!-- Bootstrap 4 -->
-<script src="/dist/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- Sparkline -->
-<script src="/dist/plugins/sparkline/jquery.sparkline.min.js"></script>
-<!-- jvectormap -->
-<script src="/dist/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
-<script src="/dist/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-<!-- Slimscroll -->
-<script src="/dist/plugins/slimScroll/jquery.slimscroll.min.js"></script>
-<!-- ChartJS 1.0.2 -->
-<script src="/dist/plugins/chartjs-old/Chart.min.js"></script>
-<!-- AdminLTE App -->
-<script src="/dist/js/adminlte.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-
-<!-- DATATABLE -->
-<script src="{{ asset('js/datatables.js') }}" defer></script>
-
+@section('localscript')
+<script src="{{ asset('js/jquery-3.5.1.js') }}" ></script>
+<script src="{{ asset('js/jquery.dataTables.min.js') }}" ></script>
 <script>
 
-                                
-                                   $(document).ready(function () {
-                                       $('#table_id').dataTable({
-                                           language: {
-                                               "sProcessing": "Procesando...",
-                                               "sLengthMenu": "Mostrar _MENU_ registros",
-                                               "sZeroRecords": "No se encontraron resultados",
-                                               "sEmptyTable": "Ningún dato disponible en esta tabla",
-                                               "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                                               "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-                                               "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-                                               "sInfoPostFix": "",
-                                               "sSearch": "Filtrar :",
-                                               "sUrl": "",
-                                               "sInfoThousands": ",",
-                                               "sLoadingRecords": "Cargando...",
-                                               "oPaginate": {
-                                                   "sFirst": "Primero",
-                                                   "sLast": "Último",
-                                                   "sNext": "Siguiente",
-                                                   "sPrevious": "Anterior"
-                                               },
-                                               "oAria": {
-                                                   "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-                                                   "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-                                               }
-                                           }
-                                       });
+                                   window.onscroll = function () {
+                                       myFunction()
+                                   };
+
+                                   function myFunction() {
+                                       var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                                       var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                                       var scrolled = (winScroll / height) * 100;
+                                       document.getElementById("myBar").style.width = scrolled + "%";
+                                   }
+
+                                   var Dtable = $('#cocodrileraDT').dataTable({
+
                                    });
-                                   function topFunction() {
-                                       document.body.scrollTop = 0;
-                                       document.documentElement.scrollTop = 0;
+
+                                   function DTVerDatos(Elem) {
+                                       var children = "/cocodrilera/".concat(Elem);
+                                       console.log(children);
+                                       var jqxhr = $.ajax(children)
+                                               .done(function (data) {
+                                                   document.getElementById("side_nombre").innerHTML = data[0].name;
+                                                   //  alert("success");
+                                                   console.log(data);
+                                               })
+                                               .fail(function () {
+                                                   alert("error");
+                                               })
+                                               .always(function () {
+                                                   alert("complete");
+                                               });
                                    }
 </script>
-@stop
+@endsection

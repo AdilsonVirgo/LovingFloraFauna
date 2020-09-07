@@ -1,0 +1,5 @@
+INSERT INTO `users` (`name`, `email`, `password` `created_at`, `updated_at`) VALUES ( 'Adilson','adilsonvirgo@gmail.com','$2y$10$0euXSzHTQV2KTpu49/veD.24dviTeCRqPATk04pPTbUTxDBAu81Mi', '2019-09-19 10:27:37', '2019-09-19 10:27:38');
+INSERT INTO `users` (`name`, `email`, `password` `created_at`, `updated_at`) VALUES ( 'Yuneisi','esp1.tur@ua.ffauna.co.cu','$2y$10$0euXSzHTQV2KTpu49/veD.24dviTeCRqPATk04pPTbUTxDBAu81Mi', '2019-09-19 10:27:37', '2019-09-19 10:27:38');
+INSERT INTO `users` (`name`, `email`, `password` `created_at`, `updated_at`) VALUES ( 'Greyse','dir.tur@ua.ffauna.co.cu','$2y$10$0euXSzHTQV2KTpu49/veD.24dviTeCRqPATk04pPTbUTxDBAu81Mi', '2019-09-19 10:27:37', '2019-09-19 10:27:38');
+INSERT INTO `users` (`name`, `email`, `password` `created_at`, `updated_at`) VALUES ( 'Jordan','esp3.tur@ua.ffauna.co.cu','$2y$10$0euXSzHTQV2KTpu49/veD.24dviTeCRqPATk04pPTbUTxDBAu81Mi', '2019-09-19 10:27:37', '2019-09-19 10:27:38');
+INSERT INTO `users` (`name`, `email`, `password` `created_at`, `updated_at`) VALUES ( 'Gleidys','esp5.tur@ua.ffauna.co.cu','$2y$10$0euXSzHTQV2KTpu49/veD.24dviTeCRqPATk04pPTbUTxDBAu81Mi', '2019-09-19 10:27:37', '2019-09-19 10:27:38');

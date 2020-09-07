@@ -2,7 +2,7 @@
     <div class="progress-container" style="position: absolute;top:0px;">
         <div class="progress-bar" id="myBar"></div>
     </div>  
-    <button class="buttonNav" onclick="openNav();">Opciones</button>
+    <button class="buttonNav hvr-icon-back" onclick="openNav();" style="width: 135px;"><i class="fa fa-chevron-circle-left hvr-icon"></i> Opciones </button>
     <div class="container">        
         <a class="navbar-brand" href="{{ url('/') }}">
             {{ config('app.name', 'Laravel') }}

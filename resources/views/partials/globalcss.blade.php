@@ -132,26 +132,12 @@
         color: black;
     }
     /*opennav*/
-    .buttonNav {
-        padding: 2px 15px;
-        font-size: 15px;
-        text-align: center;
-        cursor: pointer;
-        outline: none;
-        color: #fff;
-        background-color: #4CAF50;
-        border: none;
-        border-radius: 10px;
-        box-shadow: 0 6px #999;
-    }
-
-    .buttonNav:hover {background-color: #3e8e41}
-
-    .buttonNav:active {
-        background-color: #3e8e41;
-        box-shadow: 0 3px #666;
-        transform: translateY(4px);
-    }
+    .buttonNav{box-shadow: 0 6px #999; border-radius: 10px;font-size: 15px;padding: 2px 15px;color:black;display:inline-block;vertical-align:middle;-webkit-transform:perspective(1px) translateZ(0);transform:perspective(1px) translateZ(0);box-shadow:0 0 1px rgba(0,0,0,0);position:relative;overflow:hidden;background:white;-webkit-transition-property:color;transition-property:color;-webkit-transition-duration:.3s;transition-duration:.3s}
+    .buttonNav:before{content:"";position:absolute;z-index:-1;top:0;left:0;right:0;bottom:0;background:green;border-radius:100%;-webkit-transform:scale(0);transform:scale(0);-webkit-transition-property:transform;transition-property:transform;-webkit-transition-duration:.3s;transition-duration:.3s;-webkit-transition-timing-function:ease-out;transition-timing-function:ease-out}
+    .buttonNav:active,.buttonNav:focus,.buttonNav:hover{color:white}
+    .buttonNav:active:before,
+    .buttonNav:focus:before,
+    .buttonNav:hover:before{-webkit-transform:scale(2);transform:scale(2)}
     /**SIDENAV*/
     .accordion {
         background-color: green;
@@ -190,7 +176,7 @@
 
     .panelAccordion {
         padding: 0 18px;
-        background-color: orange;
+        background-color: #21ba45;
         color: white;
         max-height: 0;
         overflow: hidden;
@@ -202,6 +188,12 @@
     .panelAccordion a:hover {
         color:orange;       
         background-color:white;       
+    }
+    .btn-group > .btn, .btn-group-vertical > .btn {
+        position: unset;
+    }
+    .btn-group, .btn-group-vertical {
+        position: unset;
     }
     /**SIDENAV*/
     /* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */

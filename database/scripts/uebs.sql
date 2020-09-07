@@ -1,0 +1,16 @@
+INSERT INTO `uebs` (`name`,`provincia_id`, `created_at`, `updated_at`) VALUES ('Mil Cumbres',1, '2019-10-13 14:52:07', '2019-11-13 14:52:09');
+INSERT INTO `uebs` (`name`,`provincia_id`, `created_at`, `updated_at`) VALUES ('Pinar del Río',1, '2019-10-13 14:52:07', '2019-11-13 14:52:09');
+INSERT INTO `uebs` (`name`,`provincia_id`, `created_at`, `updated_at`) VALUES ('El Cacho',1, '2019-10-13 14:52:07', '2019-11-13 14:52:09');
+INSERT INTO `uebs` (`name`,`provincia_id`, `created_at`, `updated_at`) VALUES ('Artemisa',2, '2019-10-13 14:52:07', '2019-11-13 14:52:09');
+INSERT INTO `uebs` (`name`,`provincia_id`, `created_at`, `updated_at`) VALUES ('Mayabeque',3, '2019-10-13 14:52:07', '2019-11-13 14:52:09');
+INSERT INTO `uebs` (`name`,`provincia_id`, `created_at`, `updated_at`) VALUES ('La Habana',2, '2019-10-13 14:52:07', '2019-11-13 14:52:09');
+INSERT INTO `uebs` (`name`,`provincia_id`, `created_at`, `updated_at`) VALUES ('Matanzas',4, '2019-10-13 14:52:07', '2019-11-13 14:52:09');
+INSERT INTO `uebs` (`name`,`provincia_id`, `created_at`, `updated_at`) VALUES ('Villa Clara',5, '2019-10-13 14:52:07', '2019-11-13 14:52:09');
+INSERT INTO `uebs` (`name`,`provincia_id`, `created_at`, `updated_at`) VALUES ('Ciego de Ávila',7, '2019-10-13 14:52:07', '2019-11-13 14:52:09');
+INSERT INTO `uebs` (`name`,`provincia_id`, `created_at`, `updated_at`) VALUES ('Camagüey Conservacion',8, '2019-10-13 14:52:07', '2019-11-13 14:52:09');
+INSERT INTO `uebs` (`name`,`provincia_id`, `created_at`, `updated_at`) VALUES ('Camagüey Produccion',8, '2019-10-13 14:52:07', '2019-11-13 14:52:09');
+INSERT INTO `uebs` (`name`,`provincia_id`, `created_at`, `updated_at`) VALUES ('Las Tunas',9, '2019-10-13 14:52:07', '2019-11-13 14:52:09');
+INSERT INTO `uebs` (`name`,`provincia_id`, `created_at`, `updated_at`) VALUES ('Holguin',10, '2019-10-13 14:52:07', '2019-11-13 14:52:09');
+INSERT INTO `uebs` (`name`,`provincia_id`, `created_at`, `updated_at`) VALUES ('Granma Conservacion',11, '2019-10-13 14:52:07', '2019-11-13 14:52:09');
+INSERT INTO `uebs` (`name`,`provincia_id`, `created_at`, `updated_at`) VALUES ('Guantánamo',14, '2019-10-13 14:52:07', '2019-11-13 14:52:09');
+INSERT INTO `uebs` (`name`,`provincia_id`, `created_at`, `updated_at`) VALUES ('Isla de la Juventud',16, '2019-10-13 14:52:07', '2019-11-13 14:52:09');

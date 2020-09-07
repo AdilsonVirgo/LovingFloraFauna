@@ -25,3 +25,8 @@ Route::get('/homeOFF', 'HomeController@index')->name('homeOFF');
 Route::resource('/estadisticas', 'StadisticController');
 
 Route::resource('/cocodrileras', 'Servicios\CocodrileraController');
+Route::resource('/rcocodrileras', 'Reservas\ReservaCocodrileraController');
+
+
+//*AJAXS*//
+Route::get('/cocodrilera/{id}', 'Servicios\CocodrileraController@showAjax')->name('cocodrilera.show');

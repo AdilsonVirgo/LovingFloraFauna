@@ -38,7 +38,7 @@ class CocodrileraController extends Controller {
         $cocodrileras = \App\Cocodrilera::all();
         $provincias = \App\Provincia::all();
         $uebs = \App\Ueb::all();
-        return view('cocodrileras.create', compact('cocodrileras', 'provincias', 'uebs'));
+        return view('servicios.cocodrileras.create', compact('cocodrileras', 'provincias', 'uebs'));
     }
 
     public function CrearServicio($name, $class, $id, $capacidad, $activa, $observaciones) {
@@ -130,6 +130,11 @@ class CocodrileraController extends Controller {
             \Log::info($e->getMessage());
             return \Response::json(['cocodrileras' => null, 'error' => $e->getMessage()]);
         }
+    }
+
+    //AJAX
+    public function showAjax($id) {
+        return Cocodrilera::find($id)->get();
     }
 
 }

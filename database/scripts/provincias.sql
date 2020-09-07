@@ -1,0 +1,16 @@
+INSERT INTO `provincias` (`name`, `activa`, `observaciones`, `created_at`, `updated_at`) VALUES ('Pinar', '1', 'Observaciones', '2019-09-19 10:27:37', '2019-09-19 10:27:38');
+INSERT INTO `provincias` (`name`, `activa`, `observaciones`, `created_at`, `updated_at`) VALUES ('Artemisa', '1', 'Observaciones', '2019-09-19 10:27:37', '2019-09-19 10:27:38');
+INSERT INTO `provincias` (`name`, `activa`, `observaciones`, `created_at`, `updated_at`) VALUES ('La Habana', '1', 'Observaciones', '2019-09-19 10:27:37', '2019-09-19 10:27:38');
+INSERT INTO `provincias` (`name`, `activa`, `observaciones`, `created_at`, `updated_at`) VALUES ('Mayabeque', '1', 'Observaciones', '2019-09-19 10:27:37', '2019-09-19 10:27:38');
+INSERT INTO `provincias` (`name`, `activa`, `observaciones`, `created_at`, `updated_at`) VALUES ('Matanzas', '1', 'Observaciones', '2019-09-19 10:27:37', '2019-09-19 10:27:38');
+INSERT INTO `provincias` (`name`, `activa`, `observaciones`, `created_at`, `updated_at`) VALUES ('Cienfuegos', '1', 'Observaciones', '2019-09-19 10:27:37', '2019-09-19 10:27:38');
+INSERT INTO `provincias` (`name`, `activa`, `observaciones`, `created_at`, `updated_at`) VALUES ('Villa Clara', '1', 'Observaciones', '2019-09-19 10:27:37', '2019-09-19 10:27:38');
+INSERT INTO `provincias` (`name`, `activa`, `observaciones`, `created_at`, `updated_at`) VALUES ('Santi Spiritus', '1', 'Observaciones', '2019-09-19 10:27:37', '2019-09-19 10:27:38');
+INSERT INTO `provincias` (`name`, `activa`, `observaciones`, `created_at`, `updated_at`) VALUES ('Ciego de Avila', '1', 'Observaciones', '2019-09-19 10:27:37', '2019-09-19 10:27:38');
+INSERT INTO `provincias` (`name`, `activa`, `observaciones`, `created_at`, `updated_at`) VALUES ('Camaguey', '1', 'Observaciones', '2019-09-19 10:27:37', '2019-09-19 10:27:38');
+INSERT INTO `provincias` (`name`, `activa`, `observaciones`, `created_at`, `updated_at`) VALUES ('Las Tunas', '1', 'Observaciones', '2019-09-19 10:27:37', '2019-09-19 10:27:38');
+INSERT INTO `provincias` (`name`, `activa`, `observaciones`, `created_at`, `updated_at`) VALUES ('Holguin', '1', 'Observaciones', '2019-09-19 10:27:37', '2019-09-19 10:27:38');
+INSERT INTO `provincias` (`name`, `activa`, `observaciones`, `created_at`, `updated_at`) VALUES ('Granma', '1', 'Observaciones', '2019-09-19 10:27:37', '2019-09-19 10:27:38');
+INSERT INTO `provincias` (`name`, `activa`, `observaciones`, `created_at`, `updated_at`) VALUES ('Santiago', '1', 'Observaciones', '2019-09-19 10:27:37', '2019-09-19 10:27:38');
+INSERT INTO `provincias` (`name`, `activa`, `observaciones`, `created_at`, `updated_at`) VALUES ('Guantanamo', '1', 'Observaciones', '2019-09-19 10:27:37', '2019-09-19 10:27:38');
+INSERT INTO `provincias` (`name`, `activa`, `observaciones`, `created_at`, `updated_at`) VALUES ('Isla de la Juventud', '1', 'Observaciones', '2019-09-19 10:27:37', '2019-09-19 10:27:38');
