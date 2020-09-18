@@ -18,6 +18,9 @@ class ReservaCocodrilera extends Model {
         'plan',
         'fecha_entrada',
         'fecha_salida',
+        'adultos',
+        'menores',
+        'agencia_id',
         'activa',
         'observaciones',];
 

@@ -28,27 +28,26 @@ class Controller extends BaseController {
         return $this->recorrerfechas($array_fechas, $datosiniciales);
     }
 
-    public function capturartodoyconvertir($request) {
+    public function capturartodoyconvertir($request) {//name,cliente,total,fe,fs,feCARBON,fsCARBON,servicio_id
         $nameReserva = $request->get('name'); //array[0]
         $clienteReserva = "CLIENTE"; //array[1]
         $pilagente_idReserva = $request->get('total_pax'); //array[2]
         $fecha_entrada = $request->get('fecha_entrada'); //array[3]
         $fecha_salida = $request->get('fecha_salida'); //array[4]
-        // $first = new Carbon\Carbon($fecha_entrada, null); //array[5]//CARBON1
-        // $second = new Carbon\Carbon($fecha_salida, null); //array[6]
-        $first = \Carbon\Carbon::createFromFormat('Y-m-d', $fecha_entrada); //CARBON2
-        $second = \Carbon\Carbon::createFromFormat('Y-m-d', $fecha_salida);
+         $first = new \Carbon\Carbon($fecha_entrada, null); //array[5]//CARBON1
+         $second = new \Carbon\Carbon($fecha_salida, null); //array[6]
+//        $first = \Carbon\Carbon::createFromFormat('Y-m-d', $fecha_entrada); //CARBON2
+//        $second = \Carbon\Carbon::createFromFormat('Y-m-d', $fecha_salida);
         $alojamiento_idReserva = $request->get('servicio_id'); //array[7]//alojamiento_id
         $array = array($nameReserva, $clienteReserva, $pilagente_idReserva, $fecha_entrada, $fecha_salida, $first, $second, $alojamiento_idReserva);
         return $array;
     }
 
     public function Dias2Fechas($fecha_entrada, $fecha_salida) {//esto se puede mejorar //parametro fecha sin carbon      
-        //$f1 = new Carbon\Carbon($fecha_entrada, null);
-        // $f2 = new Carbon\Carbon($fecha_salida, null);
-        $f1 = \Carbon\Carbon::createFromFormat('Y-m-d', $fecha_entrada);
-        $f2 = \Carbon\Carbon::createFromFormat('Y-m-d', $fecha_salida);
-
+        $f1 = new \Carbon\Carbon($fecha_entrada, null);
+        $f2 = new \Carbon\Carbon($fecha_salida, null);
+//        $f1 = \Carbon\Carbon::createFromFormat('Y-m-d', $fecha_entrada);
+//        $f2 = \Carbon\Carbon::createFromFormat('Y-m-d', $fecha_salida);
         $fecha1 = $f1->copy();
         $fecha2 = $f2->copy();
         $fechasArray = null;
@@ -76,18 +75,22 @@ class Controller extends BaseController {
     }
 
     public function recorrerfechas($array_fechas, $datosiniciales) {
+       // return($datosiniciales);
         $array_booleans = null;
         $i = 0;
         foreach ($array_fechas as $currentdate) {
             $encontreOnull = $this->DameDatosdeBDEstaFecha($currentdate, $datosiniciales[7]); //servicioid
+            //ESTA MUY UNIDO//$array_booleans = Arr::add($array_booleans, $i, $this->condicion2CompararDispoAlojamientoconDatosIniciales($encontreOnull, $datosiniciales));
+         // dd($this->condicion2CompararDispoAlojamientoconDatosIniciales($encontreOnull, $datosiniciales));
             $array_booleans = Arr::add($array_booleans, $i, $this->condicion2CompararDispoAlojamientoconDatosIniciales($encontreOnull, $datosiniciales));
             $i++;
         }
         $collection = collect($array_booleans);
+        
         $eve = $collection->every(function ($value, $key) {
             return $value == true;
         });
-        // return $eve;
+       // return $eve;//AQUI SE DETIENE SI NO SE QUIERE INSERTAR EN DISPOLIST
         if ($eve) {//si es verdadero se pueden insertar
             foreach ($array_fechas as $currentdate) {
                 $encontreOnull = $this->DameDatosdeBDEstaFecha($currentdate, $datosiniciales[7]); //comparar si es null el alojamiento
@@ -113,10 +116,15 @@ class Controller extends BaseController {
 
     public function condicion2CompararDispoAlojamientoconDatosIniciales($encontreOnull, $datosiniciales) {//en el dia actual compara dispo
         $afind = Servicio::find($datosiniciales[7]); //id->alojamiento      
+        //dd($encontreOnull);//ESO ES SI ENCONTRO EN DISPOLIST ALGUN DATO DE ESTE DIA Y ESTE SERVICIO
+      
+//      dd($afind->watchable->disponibilidad);
+//      dd($this->condicion1Null($encontreOnull));
         // dd($afind->watchable->disponibilidad);
         //dd($encontreOnull);
         if ($this->condicion1Null($encontreOnull)) {//encontre
             if ($afind->watchable->disponibilidad >= $datosiniciales[2]) {//$afind->watchable->disponibilidad
+                
                 return true;
             }
         } else {

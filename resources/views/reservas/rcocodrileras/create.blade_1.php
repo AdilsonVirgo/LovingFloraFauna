@@ -208,106 +208,251 @@
 
 @section('content')
 <div class="main" style="padding: 5px 5px; background-color: #d4edda;">
-    <form   method="GET" action="{{url('/tengo')}}" id="rcocodrilera-form">
-        {{ csrf_field() }}       
+    <div class="container">
 
-        <div class="row">
 
-            <div class="col-md-4" style="position:unset;">
-                <div class="row m-1"><label for="name" class="m-1">Localizador</label>
-                    <input id="name" type="text" name="name" value="{{ old('name') }}" class=" m-1" required unique:rcocodrileras maxlength="100" autofocus style="height:30px;"/>
-                </div>
-                <div class="row m-1"><label for="cocodrilera_id" class="m-1">Cocodrilera</label>
-                    <a class="btn btn-success border-white btn-sm"  href="{{ URL::to('cocodrileras/create') }}"><i class="fa fa-plus"></i></a>
-                    <select id="cocodrilera_id" class="m-1" name="cocodrilera_id" value="{{ old('cocodrilera_id') }}" required autofocus  style="height:30px;">
-                        <option value="">Escoje...</option>@foreach($cocodrileras as $x => $cocodrilera) <option value="{{$cocodrilera->id}}">{{$cocodrilera->name}}</option>@endforeach
-                    </select>
-                </div>
+        <form   method="GET" action="{{url('/tengo')}}" id="rcocodrilera-form">
+            {{ csrf_field() }}       
+            <div class="form-group row">
+                <div class="col-20"> <label for="name">Localizador</label></div>
 
-            </div>
-            <div class="col-md-4" style="position:unset;">
-                <div class="row m-1"><label for="plan" class="m-1">Plan</label>
-                    <select id="plan"  class="m-1" name="plan" value="{{ old('plan') }}" required autofocus style="height:30px;">
-                        <option value="">Escoje...</option><option value="0">No Plan</option><option value="1">(AP)</option><option value="2">(MAP)</option><option value="3">(EP)</option><option value="4">(CP)</option><option value="5">Todo Incluido</option><option value="6">Desayuno</option>                                        
-                        <option value="7">Merienda</option><option value="8">Almuerzo</option><option value="9">Comida</option><option value="10">Desayuno,Merienda</option><option value="11">Desayuno,Almuerzo</option><option value="12">Desayuno,Comida</option>                                        
-                        <option value="13">Desy.,Almz.,Comd</option><option value="14">Merienda,Almuerzo</option><option value="15">Merienda,Comida</option><option value="16">Almuerzo,Comida</option>                                         
-                    </select>  
-                </div>
-
-                <div class="row m-1"><label for="mercado_id" class="m-1">Mercado</label>
-                    <a class="btn btn-success border-white btn-sm" href="{{ URL::to('mercados/create') }}"><i class="fa fa-plus"></i></a>
-                    <select  id="mercado_id" class="m-1" name="mercado_id" value="{{ old('mercado_id') }}" required autofocus  style="height:30px;">
-                        <option value="">Escoje...</option>@foreach($mercados as $x => $mercado) <option value="{{$mercado->id}}">{{$mercado->name}}</option>@endforeach
-                    </select>  
+                <div class="col-75">  <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required unique:rcocodrileras maxlength="100" autofocus>
+                    @if ($errors->has('name'))
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('name') }}</strong>
+                    </span>
+                    @endif
                 </div> 
+            </div> 
+            <div class="form-group row">   
+                <div class="col-20"> <label for="cocodrilera_id">Cocodrilera</label></div>
+                <div class="col-75 btn-group"> 
 
-            </div>
-            <div class="col-md-4" style="position:unset;">
-                <div class="row m-1"><label for="agencia_id" class="m-1">Agencia</label>
-                    <select id="agencia_id" class="m-1" name="agencia_id" value="{{ old('agencia_id') }}" required autofocus  style="height:30px;">
-                        <option value="">Escoje...</option>@foreach($agencias as $x => $agencia)<option value="{{$agencia->id}}">{{$agencia->name}}</option>@endforeach
+                    <a class="btn btn-success border-white btn-sm"  style="height: calc(1.6em + 0.75rem + 2px);"
+                       href="{{ URL::to('cocodrileras/create') }}"><i class="fa fa-plus"></i>
+                    </a>
+                    <select  style="height: calc(1.6em + 0.75rem + 2px);" id="cocodrilera_id" class="form-control{{ $errors->has('cocodrilera_id') ? ' is-invalid' : '' }}" name="cocodrilera_id" value="{{ old('cocodrilera_id') }}" required autofocus>
+                        <option value="">Escoje...</option>
+                        @foreach($cocodrileras as $x => $cocodrilera) 
+                        <option value="{{$cocodrilera->id}}">{{$cocodrilera->name}}</option>
+                        @endforeach
                     </select>  
-                </div>
-                <!--            <div class="row m-1"><label for="adultos" class="m-1">Adultos</label>
-                                <input id="adultos" type="text" name="adultos" value="{{ old('adultos') }}" class=" m-1" required maxlength="3" autofocus style="height:30px;" onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || event.charCode === 46)"/>
-                            </div>-->
-                <div class="row m-1"><label for="nac_id" class="m-1">Nacionalidad</label>
-                    <a class="btn btn-success border-white btn-sm" href="{{ URL::to('nacs/create') }}"><i class="fa fa-plus"></i></a>
-                    <select id="nac_id" class="m-1" name="nac_id" value="{{ old('nac_id') }}" required autofocus style="height:30px;">
-                        <option value="">Escoje...</option>@foreach($nacs as $x => $nac)<option value="{{$nac->id}}">{{$nac->name}}</option>@endforeach
+                    @if ($errors->has('cocodrilera_id'))
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('cocodrilera_id') }}</strong>
+                    </span>
+                    @endif                              
+                </div>                                     
+            </div>                                     
+
+
+            <div class="form-group row">
+                <div class="col-20"></div>
+                <!--<div class="col-75 btn-group" role="group">--> 
+                <div class="col-75">
+                    <div class="row ">
+                        <div class="col-6   mr-0 pr-0" style="position:unset;">
+                        
+                        <a class="btn btn-success border-white btn-sm" style="height: calc(1.6em + 0.75rem + 2px);" href="{{ URL::to('mercados/create') }}"><i class="fa fa-plus"></i>
+                    </a>
+                            <label for="mercado_id">Mercado</label>
+                    <select style="height: calc(1.6em + 0.75rem + 2px);" id="mercado_id" class="form-control{{ $errors->has('mercado_id') ? ' is-invalid' : '' }}" name="mercado_id" value="{{ old('mercado_id') }}" required autofocus>
+                        <option value="">Escoje...</option>
+                        @foreach($mercados as $x => $mercado) 
+                        <option value="{{$mercado->id}}">{{$mercado->name}}</option>
+                        @endforeach
                     </select>  
-                </div>
-            </div>
+                    @if ($errors->has('mercado_id'))
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('mercado_id') }}</strong>
+                    </span>
+                    @endif
+                    
+                        
+                        
+                        </div>
+                        <div class="col-6  ml-0 pl-0" style="position:unset;">
+                            <!--                    2 SELECT &nbsp; -->
+                    
+                    <a class="btn btn-success border-white btn-sm" style="height: calc(1.6em + 0.75rem + 2px);" href="{{ URL::to('agencias/create') }}"><i class="fa fa-plus"></i>
+                    </a>
+                            <label for="agencia_id"> Agencia </label>
+                    <select style="height: calc(1.6em + 0.75rem + 2px);float: right;" id="agencia_id" class="form-control{{ $errors->has('agencia_id') ? ' is-invalid' : '' }}" name="agencia_id" value="{{ old('agencia_id') }}" required autofocus>
+                        <option value="">Escoje...</option>
+                        @foreach($agencias as $x => $agencia) 
+                        <option value="{{$agencia->id}}">{{$agencia->name}}</option>
+                        @endforeach
+                    </select>  
+                    @if ($errors->has('agencia_id'))
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('agencia_id') }}</strong>
+                    </span>
+                    @endif
+                        </div>
+                         
+                    
 
-        </div>
+                        
+                    </div> 
+                    
+                </div> 
+            </div>  
 
-        <div class="row">
-            <div class="col-md-4 " style="position:unset;">
-                <div class="row m-1"><label for="adultos" class="m-1">Adultos</label>
-                    <input id="adultos" type="text" name="adultos" value="{{ old('adultos') }}" class=" m-1" required  maxlength="3" autofocus style="height:30px;" onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || event.charCode === 46)"/>
-                </div>
-            </div>
-            <div class="col-md-4 " style="position:unset;">
-                <div class="row m-1"><label for="menores" class="m-1">Menores</label>
-                    <input id="menores" type="text" name="menores" value="{{ old('menores') }}" class=" m-1" required  maxlength="3" autofocus style="height:30px;" onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || event.charCode === 46)"/>
-                </div>
-            </div>
-            <div class="col-md-4 " style="position:unset;">            
-                <div class="row m-1"><label for="total_pax" class="m-1">Total Pax</label>
-                    <input id="total_pax" type="text" name="total_pax" value="{{ old('total_pax') }}" class=" m-1" required maxlength="3" autofocus style="height:30px;" onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || event.charCode === 46)"/>
-                </div>
-            </div>
-        </div>
 
-        <div class="row"> 
-            <div class="col-md-4 " style="position:unset;">
-                <div class="row m-1"><label for="fecha_entrada" class="m-1">Fecha Entrada</label>
-                    <input id="fecha_entrada" type="date" class="m-1" style="width: 100%" name="fecha_entrada" value="{{ old('fecha_entrada') }}" required autofocus style="height:30px;"> 
-                </div>
-            </div>
-            <div class="col-md-4 " style="position:unset;">
-                <div class="row m-1"><label for="fecha_salida" class="m-1">Fecha Salida</label>
-                    <input id="fecha_salida" type="date" class="m-1" style="width: 100%" name="fecha_salida" value="{{ old('fecha_salida') }}" required autofocus style="height:30px;"> 
-                </div>
-            </div>
-            <div class="col-md-4 " style="position:unset;">
-                <div class="row m-1"><label for="observaciones" class="m-1">Observaciones</label>
-                    <input id="observaciones" class="m-1" type="text" name="observaciones" value="{{ old('observaciones') }}" required autofocus style="padding: 0.375rem 0.75rem;border: 1px solid #ced4da;border-radius: 0.25rem; height:30px;">  
-                </div>
-            </div>
-        </div>   
-        <div>
-            <div class="col-md-4 " style="position:unset;">
-                <div class="row m-1">
-                    <input id="activa" class="m-1" type="hidden" name="activa" value="1" required autofocus style="padding: 0.375rem 0.75rem;border: 1px solid #ced4da;border-radius: 0.25rem; height:30px;">  
-                </div>
-            </div>
-        </div>   
+            <div class="form-group row">                                            
+                <div class="col-20">  <label for="nac_id">Nacionalidad</label></div>
+                <div class="col-75 btn-group" role="group">  <a class="btn btn-success border-white btn-sm" style="height: calc(1.6em + 0.75rem + 2px);"
+                                                                href="{{ URL::to('nacs/create') }}"><i class="fa fa-plus"></i>
+                    </a>
+                    <select style="height: calc(1.6em + 0.75rem + 2px);" id="nac_id" class="form-control{{ $errors->has('nac_id') ? ' is-invalid' : '' }}" name="nac_id" value="{{ old('nac_id') }}" required autofocus>
+                        <option value="">Escoje...</option>
+                        @foreach($nacs as $x => $nac) 
+                        <option value="{{$nac->id}}">{{$nac->name}}</option>
+                        @endforeach
+                    </select>  
+                    @if ($errors->has('nac_id'))
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('nac_id') }}</strong>
+                    </span>
+                    @endif
 
-    </form>
+                </div> 
+            </div> 
 
-    <div> 
-        <a id="fb1" style="margin-left:8px;height:30px;display: unset; " class="btn btn-outline-success" href="/home"
+            <!--            <div class="form-group row">
+                            <div class="col-20"><label for="adultos">Adultos</label></div>
+                            <div class="col-75"> 
+                                <input id="adultos" type="number" class="form-control{{ $errors->has('adultos') ? ' is-invalid' : '' }}" 
+                                       name="adultos" value="{{ old('adultos') }}" min="1" max="50" required autofocus step="1"
+                                       onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || event.charCode === 46)">
+                                @if ($errors->has('adultos'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('adultos') }}</strong>
+                                </span>
+                                @endif
+                            </div>  
+                            <div class="col-20"><label for="menores">Menores</label></div>
+                            <div class="col-75"> 
+                                <input id="menores" type="number" class="form-control{{ $errors->has('menores') ? ' is-invalid' : '' }}" 
+                                       name="menores" value="{{ old('menores') }}" min="0" max="50" required autofocus step="1"
+                                       onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || event.charCode === 46)">
+                                @if ($errors->has('menores'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('menores') }}</strong>
+                                </span>
+                                @endif
+                            </div>  
+                        </div>  -->
+            
+            <div class="form-group row">
+                <div class="col-20"><label for="adultos">Adultos</label></div>
+                <div class="col-75"> 
+                    <div class="row">
+                        <div class="col-4 mr-0 pr-0">
+                            <input id="adultos" type="number" name="adultos" value="{{ old('adultos') }}" min="1" max="50" required autofocus step="1"
+                                   onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || event.charCode === 46)"
+                                   style="padding: 0.375rem 0.75rem;border: 1px solid #ced4da;border-radius: 0.25rem;width: 70px;">  
+                        </div>  
+                        
+                        <div class="col-4  ml-0 mr-0 pr-0 pl-0">
+                            <label for="menores"> Menores </label>
+                            <input id="menores" type="number" name="menores" value="{{ old('menores') }}" min="0" max="50" required autofocus step="1"
+                                   onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || event.charCode === 46)"
+                                   style="padding: 0.375rem 0.75rem;border: 1px solid #ced4da;border-radius: 0.25rem;width: 70px;">                            
+                        </div>  
+                        
+                        <div class="col-4 ml-0 pl-0">
+                            <input id="total_pax" type="number" class="{{ $errors->has('total_pax') ? ' is-invalid' : '' }}" 
+                                   name="total_pax" value="{{ old('total_pax') }}" min="1" max="100" required autofocus step="1"
+                                   onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || event.charCode === 46)"
+                                   style="padding: 0.375rem 0.75rem;border: 1px solid #ced4da;border-radius: 0.25rem;width: 70px;float:right;">
+                            @if ($errors->has('total_pax'))
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $errors->first('total_pax') }}</strong>
+                            </span>
+                            @endif
+                            <label for="menores" style="float:right;"> Total Pax </label>
+                        </div> 
+                        
+                    </div>  
+                </div>  
+            </div>  
+
+            <div class="form-group row">
+                <div class="col-20"> <label for="activa"  >Plan</label></div>
+                <div class="col-75">     <select id="plan"  class="form-control{{ $errors->has('plan') ? ' is-invalid' : '' }}" name="plan" value="{{ old('plan') }}" required autofocus>
+                        <option value="">Escoje...</option>
+                        <option value="0">No Plan</option>
+                        <option value="1">(AP)</option>
+                        <option value="2">(MAP)</option>
+                        <option value="3">(EP)</option>
+                        <option value="4">(CP)</option>
+                        <option value="5">Todo Incluido</option>                                        
+                        <option value="6">Desayuno</option>                                        
+                        <option value="7">Merienda</option>                                        
+                        <option value="8">Almuerzo</option>                                        
+                        <option value="9">Comida</option>                                        
+                        <option value="10">Desayuno,Merienda</option>                                        
+                        <option value="11">Desayuno,Almuerzo</option>                                        
+                        <option value="12">Desayuno,Comida</option>                                        
+                        <option value="13">Desy.,Almz.,Comd</option>                                        
+                        <option value="14">Merienda,Almuerzo</option>                                        
+                        <option value="15">Merienda,Comida</option>                                        
+                        <option value="16">Almuerzo,Comida</option>                                         
+                    </select>  
+                    @if ($errors->has('plan'))
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('plan') }}</strong>
+                    </span>
+                    @endif
+                </div> 
+            </div> 
+            <div class="form-group row">
+                <div class="col-20"><label for="fecha_entrada">Fecha_entrada</label></div>
+                <div class="col-75">   <input id="fecha_entrada" type="date" class="form-control{{ $errors->has('fecha_entrada') ? ' is-invalid' : '' }}" name="fecha_entrada" value="{{ old('fecha_entrada') }}" required autofocus>
+                    @if ($errors->has('fecha_entrada'))
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('fecha_entrada') }}</strong>
+                    </span>
+                    @endif
+                </div>  
+            </div>  
+            <div class="form-group row">
+                <div class="col-20"><label for="fecha_salida">Fecha_salida</label></div>
+                <div class="col-75">  <input id="fecha_salida" type="date" class="form-control{{ $errors->has('fecha_salida') ? ' is-invalid' : '' }}" name="fecha_salida" value="{{ old('fecha_salida') }}" required autofocus>
+                    @if ($errors->has('fecha_salida'))
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('fecha_salida') }}</strong>
+                    </span>
+                    @endif
+                </div>  
+            </div>  
+            <div class="form-group row">
+                <div class="col-20">  <label for="activa"  >Activa</label></div>
+                <div class="col-75"> <select id="activa"  class="form-control{{ $errors->has('activa') ? ' is-invalid' : '' }}" name="activa" value="{{ old('activa') }}" required autofocus>
+                        <option value="">Escoje...</option>                                                   
+                        <option value="1">Sí</option>
+                        <option value="0">No</option>                                                    
+                    </select>  
+                    @if ($errors->has('activa'))
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('activa') }}</strong>
+                    </span>
+                    @endif
+                </div> 
+            </div> 
+            <div class="form-group row">
+                <div class="col-20"><label for="observaciones"  >Observaciones</label></div>
+                <div class="col-75"> <input id="observaciones" type="text" class="form-control{{ $errors->has('observaciones') ? ' is-invalid' : '' }}" name="observaciones" value="{{ old('observaciones') }}">
+                    @if ($errors->has('observaciones'))
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('observaciones') }}</strong>
+                    </span>
+                    @endif
+                </div> 
+            </div> 
+        </form>
+        <a id="fb1" class="btn btn-outline-success" href="/home"
            onclick="/*event.preventDefault();
             if (validateForm()){*/
                event.preventDefault();
@@ -319,9 +464,10 @@
                event.preventDefault();
                }
            ">
-            Reservar </a>
-    </div>
+            Crear una nueva Reserva de Cocodrilera</a>
 
+
+    </div>
 </div>
 @endsection
 
@@ -487,13 +633,7 @@
                            cocodrileraForm == "" ||
                            mercadoForm == "" ||
                            totalForm == "" ||
-                           totalForm == "0" ||
-                           totalForm == "00" ||
-                           totalForm == "000" ||
                            adultosForm == "" ||
-                           adultosForm == "0" ||
-                           adultosForm == "00" ||
-                           adultosForm == "000" ||
                            menoresForm == "" ||
                            nacForm == "" ||
                            planForm == "" ||
@@ -543,9 +683,8 @@
                }
 
                function TotalEsMenorqueCapacidad(totalForm, cocodrileraForm, adultosForm, menoresForm) {
-                   document.getElementById("resultadoTotal").innerHTML = 'false';
-                   ApiCocodrileraCapacidad(totalForm, cocodrileraForm);             
-                   if (totalForm < adultosForm) {//SI DA TRUE ESTA MAL
+                   ApiCocodrileraCapacidad(totalForm, cocodrileraForm);
+                   if (totalForm < adultosForm) {
                        MensajeDeTotalMayorIgualQAdultos();
                        document.getElementById('adultos').style.backgroundColor = "lightgreen";
                        document.getElementById('total_pax').style.backgroundColor = "lightgreen";
@@ -563,7 +702,6 @@
                        return false;
                    }
                }
-
                function MensajeDeTotalMayorIgualQAdultos() {
                    let timerInterval;
                    Swal.fire({
@@ -588,7 +726,7 @@
                        }
                    })
                }
-
+               
                function MensajeDeTotal(totalMaximo) {
                    let timerInterval;
                    let tM = totalMaximo;

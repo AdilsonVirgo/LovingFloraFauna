@@ -71,6 +71,9 @@ class CocodrileraController extends Controller {
             'observaciones' => [],
         ]);
         $retorno = tap(new Cocodrilera($attributes))->save();
+        /*Actualizar Disponibilidad*/
+        \DB::table('cocodrileras')->where('id', $retorno->id)->update(['disponibilidad' => $request->capacidad]);
+        
         $fullname = $retorno->name . '-Cocodrilera';
         $service = $this->CrearServicio($fullname, 'App\Cocodrilera', $retorno->id, $request->capacidad, true, $request->observaciones);
         if ($retorno) {
@@ -130,11 +133,6 @@ class CocodrileraController extends Controller {
             \Log::info($e->getMessage());
             return \Response::json(['cocodrileras' => null, 'error' => $e->getMessage()]);
         }
-    }
-
-    //AJAX
-    public function showAjax($id) {
-        return Cocodrilera::find($id)->get();
     }
 
 }

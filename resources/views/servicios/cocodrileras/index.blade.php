@@ -126,13 +126,14 @@
                 </td>
                 <td>
                     <a class="btn btn-sm btn-success border-white btn-sm editbutton"
-                       href="{{ URL::to('cocodrileras/' . $user->id . '/edit') }}"><i class="fa fa-home"></i></a>
+                       href="{{ URL::to('cocodrileras/' . $user->id . '/edit') }}"><i class="fa fa-pencil-alt"></i></a>
                     <a class="btn btn-sm btn-danger banbutton border-white"
                        href="{{ URL::to('cocodrileras/' . $user->id . '/ban') }}"
                        data-toggle="tooltip" title="Desactivar">
                         <i class="fa fa-ban"></i>
                     </a>
-                    <button  style="background-color: orange;" onclick="var id = {{$user->id}}; DTVerDatos(id);"> <i class="fa fa-eye"></i></button>
+                    <button  style="background-color: orange;" onclick="var id = {{$user->id}}; DTVerDatos(id);"> 
+                        <i class="fa fa-eye" style="background-color: white"></i></button>
                 </td>
             </tr>  
             @endforeach   
@@ -174,7 +175,7 @@
 
                         });
                         function DTVerDatos(Elem) {
-                        var children = "/cocodrilera/".concat(Elem);
+                        var children = "/api/cocodrilera/".concat(Elem);
                         console.log(children);
                         var jqxhr = $.ajax(children)
                                 .done(function(data) {

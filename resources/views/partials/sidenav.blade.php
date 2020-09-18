@@ -34,13 +34,13 @@
         <a href="/vallas"> Vallas <i class="fa fa-smile hvr-icon"></i></a>    
     </div>
 
-    <button class="accordion">Nomencladores</button>
+    <button class="accordion">Otros datos</button>
     <div class="panelAccordion">
         <a href="agencias"> Agencia </a>
-        <a href="mercados"> Mercados </a>
-        <a href="nacs"> Nacionalidades </a>
-        <a href="provincias"> Provincias <i class="fa fa-smile hvr-icon"></i></a>
-        <a href="uebs"> Uebs <i class="fa fa-smile hvr-icon"></i></a>
+        <a href="mercados"> Mercado </a>
+        <a href="nacs"> Nacionalidad </a>
+        <a href="provincias"> Provincia <i class="fa fa-smile hvr-icon"></i></a>
+        <a href="uebs"> UEB <i class="fa fa-smile hvr-icon"></i></a>
     </div>
 
     <a href="#">Acerca</a>

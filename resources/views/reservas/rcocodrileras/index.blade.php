@@ -170,7 +170,7 @@
 
                         });
                         function DTVerDatos(Elem) {
-                        var children = "/cocodrilera/".concat(Elem);
+                        var children = "/api/rcocodrilera/".concat(Elem);
                         console.log(children);
                         var jqxhr = $.ajax(children)
                                 .done(function(data) {
