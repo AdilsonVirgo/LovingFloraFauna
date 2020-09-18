@@ -21,6 +21,9 @@ class CreateReservaCocodrilerasTable extends Migration {
             $table->integer('plan')->default(0);
             $table->date('fecha_entrada');
             $table->date('fecha_salida');
+            $table->integer('adultos')->default(1);
+            $table->integer('menores')->default(0);
+            $table->integer('agencia_id')->default(1);
             $table->boolean('activa')->default(true);
             $table->string('observaciones')->nullable();
             $table->timestamps();

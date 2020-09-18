@@ -29,4 +29,16 @@ Route::resource('/rcocodrileras', 'Reservas\ReservaCocodrileraController');
 
 
 //*AJAXS*//
-Route::get('/cocodrilera/{id}', 'Servicios\CocodrileraController@showAjax')->name('cocodrilera.show');
+Route::get('/dispococo9params/{nameForm}/{cocodrileraForm}/{mercadoForm}/{totalForm}/{nacForm}/{planForm}/{fechaEForm}/{fechaSForm}/{activaForm}',
+        'Reservas\ReservaCocodrileraController@DispoCOCO9params')->name('api.dispococo9params');
+Route::get('/dispococo11params/{nameForm}/{cocodrileraForm}/{mercadoForm}/{totalForm}/{nacForm}/{planForm}/{fechaEForm}/{fechaSForm}/{adultos}/{menores}/{activaForm}',
+        'Reservas\ReservaCocodrileraController@DispoCOCO11params')->name('api.dispococo11params');
+Route::get('/dispococo12params/{nameForm}/{cocodrileraForm}/{mercadoForm}/{totalForm}/{nacForm}/{planForm}/{fechaEForm}/{fechaSForm}/{adultos}/{menores}/{agenciaForm}/{activaForm}',
+        'Reservas\ReservaCocodrileraController@DispoCOCO12params')->name('api.dispococo12params');
+
+
+Route::get('/dispo/{nameForm}/{cocodrileraForm}/{mercadoForm}/{totalForm}/{nacForm}/{planForm}/{fechaEForm}/{fechaSForm}/{activaForm}',
+        'Reservas\ReservaCocodrileraController@dispo')->name('api.dispo');
+Route::get('/onedaydispo/{nameForm}/{cocodrileraForm}/{mercadoForm}/{totalForm}/{nacForm}/{planForm}/{fechaEForm}/{fechaSForm}/{activaForm}',
+        'Reservas\ReservaCocodrileraController@onedaydispo')->name('onedaydispo');
+
