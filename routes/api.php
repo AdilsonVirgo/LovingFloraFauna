@@ -34,6 +34,8 @@ Route::get('/nacionalidad/{id}', 'API\NomencladoresAPIController@nacionalidad')-
 Route::get('/nacionalidades', 'API\NomencladoresAPIController@nacionalidades')->name('api.nacionalidades');
 Route::get('/agencia/{id}', 'API\NomencladoresAPIController@agencia')->name('api.agencia');
 Route::get('/agencias', 'API\NomencladoresAPIController@agencias')->name('api.agencias');
+Route::get('/provincia/{id}', 'API\NomencladoresAPIController@provincia')->name('api.provincia');
+Route::get('/provincias', 'API\NomencladoresAPIController@provincias')->name('api.provincias');
 #endregion
 
 //Route::get('/dispococo/{id}/{id2}/{id3}/{id4}/{id5}/{id6}/{id7}/{id8}/{id9}',

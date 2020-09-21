@@ -65,29 +65,26 @@
 <div class="side" style="padding: 10px 10px;background-color: orange">
     <ul class="breadcrumb">
         <li><a href="home">Inicio</a></li>
-        <li><a href="rcocodrileras">Reservas</a></li>
-        <li><a href="rcocodrileras/create">Nueva</a></li>
+        <li><a href="cocodrileras">Cocodrileras</a></li>
+        <li><a href="cocodrileras/create">Nueva</a></li>
     </ul>
     <div class="column">
         <div id="myDIV" class="card1">
             <p><i class="fa fa-user"></i>Notas</p>
             <h3 id="side_nombre"></h3>
-            <h3 id="side_fecha_entrada"></h3>
-            <h3 id="side_fecha_salida"></h3>
-            <h3 id="side_observaciones"></h3>
-            <h3 id="side_mercado"></h3>
-            <h3 id="side_plan"></h3>
-            <h3 id="side_total_pax"></h3>
-            <h3 id="side_adultos"></h3>
         </div>
     </div>
 
-    <a href="/rrcocodrileras" class="btn"><i class="fa fa-user"></i>
+    <a href="/rcocodrileras" class="btn"><i class="fa fa-user"></i>
         Volver a Reserva Cocodrileras
     </a>
     <a href="/mixtas" class="btn"> <i class="fa fa-user"></i>Volver a ReservaMixtas<i class="fa fa-cubes" aria-hidden="true"></i>
     </a>
-    
+
+
+
+
+
 </div>
 @endsection
 
@@ -100,42 +97,43 @@
                 <th>Id</th>
                 <th>Nombre</th>
                 <th>Activa</th>
-                <th>Total</th>
-                <th>FEntrada</th>
+                <th>Observaciones</th>
+                <th>Creado</th>
                 <th>Accion</th>
             </tr>
         </thead>
         <tbody>
 
-            @foreach ($rcocodrileras as $user)
+            @foreach ($cocodrileras as $user)
             <tr id="trusers"  class="@php if($user->activa==0) { echo e('rejected');}  @endphp">
                 <td>
-                    <a href="{{ URL::to('rcocodrileras/'. $user->id) }}"style="color:black">{{$user->id}}</a>
+                    <a href="{{ URL::to('cocodrileras/'. $user->id) }}"style="color:black">{{$user->id}}</a>
                 </td>
                 <td>
-                    <a href="{{ URL::to('rcocodrileras/'. $user->id) }}"style="color:black">{{$user->name}}</a>
+                    <a href="{{ URL::to('cocodrileras/'. $user->id) }}"style="color:black">{{$user->name}}</a>
                 </td>
                 <td>
-                    <a href="{{ URL::to('rcocodrileras/'. $user->id) }}"style="color:black">@php 
+                    <a href="{{ URL::to('cocodrileras/'. $user->id) }}"style="color:black">@php 
                         if($user->activa==1) { echo e('activa');} 
                         if($user->activa==0) { echo e('inactiva');}
                         @endphp</a>
                 </td>
                 <td>
-                    <a href="{{ URL::to('rcocodrileras/'. $user->id) }}"style="color:black">{{$user->total_pax}}</a>
+                    <a href="{{ URL::to('cocodrileras/'. $user->id) }}"style="color:black">{{$user->observaciones}}</a>
                 </td>
                 <td class="mobilehide">
-                    <a href="{{ URL::to('rcocodrileras/'. $user->id) }}"style="color:black">{{$user->fecha_entrada}}</a>
+                    <a href="{{ URL::to('cocodrileras/'. $user->id) }}"style="color:black">{{$user->created_at}}</a>
                 </td>
                 <td>
                     <a class="btn btn-sm btn-success border-white btn-sm editbutton"
-                       href="{{ URL::to('rcocodrileras/' . $user->id . '/edit') }}"><i class="fa fa-home"></i></a>
+                       href="{{ URL::to('cocodrileras/' . $user->id . '/edit') }}"><i class="fa fa-pencil-alt"></i></a>
                     <a class="btn btn-sm btn-danger banbutton border-white"
-                       href="{{ URL::to('rcocodrileras/' . $user->id . '/ban') }}"
+                       href="{{ URL::to('cocodrileras/' . $user->id . '/ban') }}"
                        data-toggle="tooltip" title="Desactivar">
                         <i class="fa fa-ban"></i>
                     </a>
-                    <button  style="background-color: orange;" onclick="var id = {{$user->id}}; DTVerDatos(id);"> <i class="fa fa-eye"></i></button>
+                    <button  style="background-color: orange;" onclick="var id = {{$user->id}}; DTVerDatos(id);"> 
+                        <i class="fa fa-eye" style="background-color: white"></i></button>
                 </td>
             </tr>  
             @endforeach   
@@ -147,8 +145,8 @@
                 <th>Id</th>
                 <th>Nombre</th>
                 <th>Activa</th>
-                <th>Total</th>
-                <th>FEntrada</th>
+                <th>Observaciones</th>
+                <th>Creado</th>
                 <th>Accion</th>
             </tr>
         </tfoot>
@@ -177,19 +175,12 @@
 
                         });
                         function DTVerDatos(Elem) {
-                        var children = "/api/rcocodrilera/".concat(Elem);
+                        var children = "/api/cocodrilera/".concat(Elem);
                         console.log(children);
                         var jqxhr = $.ajax(children)
                                 .done(function(data) {
 
                                 document.getElementById("side_nombre").innerHTML = data[Elem-1].name;
-                                document.getElementById("side_fecha_entrada").innerHTML = data[Elem-1].fecha_entrada;
-                                document.getElementById("side_fecha_salida").innerHTML = data[Elem-1].fecha_salida;
-                                document.getElementById("side_observaciones").innerHTML = data[Elem-1].observaciones;
-                                document.getElementById("side_mercado").innerHTML = data[Elem-1].mercado_id;
-                                document.getElementById("side_plan").innerHTML = data[Elem-1].plan;
-                                document.getElementById("side_total_pax").innerHTML = data[Elem-1].total_pax;
-                                document.getElementById("side_adultos").innerHTML = data[Elem-1].adultos;
                                 var element = document.getElementById("myDIV");
                                 element.classList.toggle("mystyle");
                                 console.log(data);

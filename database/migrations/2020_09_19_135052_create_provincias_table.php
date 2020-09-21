@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateProvinciasTable extends Migration
 {
@@ -14,7 +14,7 @@ class CreateProvinciasTable extends Migration
     public function up()
     {
         Schema::create('provincias', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->string('name');  
             $table->boolean('activa')->default(true);
             $table->string('observaciones')->nullable();

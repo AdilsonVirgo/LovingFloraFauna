@@ -31,6 +31,13 @@ class NomencladoresAPIController extends Controller {
     public function agencias() {
         return \App\Agencia::all();
     }
+    public function provincia($id) {
+        return \App\Provincia::find($id);
+    }
+
+    public function provincias() {
+        return \App\Provincia::all();
+    }
     
     
     

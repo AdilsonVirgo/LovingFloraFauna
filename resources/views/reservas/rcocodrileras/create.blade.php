@@ -168,9 +168,9 @@
 @section('content-left')
 <div class="side" style="padding: 10px 10px;background-color: orange">
     <ul class="breadcrumb">
-        <li><a href="home">Inicio</a></li>
-        <li><a href="cocodrileras">Cocodrileras</a></li>
-        <li><a href="cocodrileras/create">Nueva</a></li>
+        <li><a href="{{route('home')}}">Inicio</a></li>
+        <li><a href="{{route('rcocodrileras.index')}}">Reservas</a></li>
+        <li><a href="{{route('rcocodrileras.create')}}">Nueva</a></li>
     </ul>
     <div class="column">
         <div class="card1">
